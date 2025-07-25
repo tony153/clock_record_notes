@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta  name = "viewport"  content = "width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" >
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/addRecord.css">
+    <title>記帳</title>
+</head>
+<body>
+
+    <div class="ui-container">
+        <div class="hook"></div>
+        <div class="page-title">
+            <div class="button" style="visibility: hidden; width: 1em;">❮</div>
+            <div class="text-title">打卡記錄</div>
+            <div style="visibility: hidden; width: 1em;"></div>
+        </div>
+        <div class="page-title_decorate"></div>
+
+
+        <div class="contents-container">
+            <div class="contents-box addbox">
+
+                <div class="datetime_box">
+                    <h1>當前時間為</h1>
+                    <div id="show_current_time">2025-7-24 10:07</div>
+                </div>
+
+                <div class="attachment">
+                    <img src="" class="preview">
+                    <input type="file" id="fileInput" />
+                </div>
+
+                <button class="act-bnt normal" id="submit_bnt">
+                    新增
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="bottom-nav">
+            <div class="page-button" name="newaccounting-bnt">
+                <div class="icon"><ion-icon name="create-outline"></ion-icon></div>
+                <div class="bnt-title">記帳</div>
+            </div>
+            <div class="page-button" name="home-bnt">
+                <div class="icon"><ion-icon name="home-outline"></ion-icon></div>
+                <div class="bnt-title">主頁</div>
+            </div>
+            <div class="page-button" name="my-bnt">
+                <div class="icon"><ion-icon name="person-outline"></ion-icon></div>
+                <div class="bnt-title">我的</div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/addRecord.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

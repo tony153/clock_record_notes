@@ -1,0 +1,57 @@
+.addbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 90%;
+    padding-bottom: 10px;
+}
+
+#show_current_time{
+    font-size: 2em;
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.attachment{
+    width: calc(80% - 30px);
+    height: 200px;
+    border: #33a7ffed 5px dashed ;
+    position: relative;
+    margin: 10px; 
+    overflow: hidden;
+}
+
+.attachment::before{
+    content: "+";
+    font-size: 3em;
+    font-weight: bolder;
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translateX(-50%);
+    color: #33a7ffed;
+}
+
+.attachment>input{
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+}
+
+.attachment>.preview{
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+.datetime_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

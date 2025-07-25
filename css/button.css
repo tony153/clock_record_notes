@@ -1,0 +1,47 @@
+.act-bnt{
+    font-size: 1.2em;
+    background-color:rgb(230, 230, 230);
+    color: #f9f9f9;
+    border: #ffffff solid 1px;
+    border-radius: 60px;
+    padding: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    user-select: none;
+}
+
+.act-bnt:active{
+    background-color:rgb(183, 183, 183);
+}
+.regular{
+    background-color:#0db66a;
+}
+.regular:active{
+    background-color:#176241;
+}
+.normal{
+    background-color: #71c5e1;
+}
+.normal:active{
+    background-color: #2a6e85;
+    color: #ffffff;
+}
+
+.warn{
+    background-color: #eddc5b;
+}
+.warn:active{
+    background-color: #ab9700;
+    color: #ffffff;
+}
+
+.danger{
+    background-color: #ed5b5b;
+}
+
+.danger:active{
+    background-color: #c90000;
+    color: #ffffff;
+}
