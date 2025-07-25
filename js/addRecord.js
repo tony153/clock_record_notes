@@ -1,4 +1,5 @@
 var current_time = ""
+let resizedBlob = null;
 function updateTime() {
     const now = new Date();
     const date = now.toLocaleDateString();      // 格式如 2025/7/24
@@ -17,9 +18,14 @@ updateTime(); // 初始立即執行一次
 document.getElementById('fileInput').addEventListener('change', function (event) {
 const file = event.target.files[0];
 if (file && file.type.startsWith('image/')) {
+
+    const img = new Image();
     const reader = new FileReader();
     reader.onload = function (e) {
         document.querySelector('.attachment .preview').src = e.target.result;
+
+        img.src = e.target.result;
+
 
         const base64Data = reader.result.split(',')[1]; // 去掉前綴
         fileData = {
@@ -28,6 +34,25 @@ if (file && file.type.startsWith('image/')) {
             contents: base64Data
         };
     };
+
+    img.onload = () => {
+        const MAX_WIDTH = 800;
+        const scale = MAX_WIDTH / img.width;
+        const width = MAX_WIDTH;
+        const height = img.height * scale;
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob((blob) => {
+          resizedBlob = blob;
+          alert("圖片已成功縮小，可以上傳！");
+        }, "image/jpeg", 0.8); // 壓縮品質 0.8
+      };
+
     reader.readAsDataURL(file);
     
 } else {
