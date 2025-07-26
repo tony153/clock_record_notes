@@ -58,7 +58,7 @@ function show_message(message){
         document.querySelector(".show-message").style.opacity = "1"
     }, 10);
 
-    setTimeout(() => {hide_message()},3000)
+    setTimeout(() => {hide_message()},1000)
     
 }
 
