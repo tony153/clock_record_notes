@@ -8,7 +8,7 @@ function randRecordsList(recordsList) {
     recordsList.forEach(item => {
         targetElement.innerHTML += `
         <div class="row list-item">
-            <div class="row-title" onlclick ="javaScript:show_detail('${item["檔名"]}', '${item["前端記錄時間"]}')">`+formatUsingIntl(item["前端記錄時間"])+`</div>
+            <div class="row-title" onclick ="javaScript:show_detail('${item["檔名"]}', '${item["前端記錄時間"]}')">`+formatUsingIntl(item["前端記錄時間"])+`</div>
             <a href="`+item["圖片連結"]+`"><div class="act-bnt regular">查看</div></a>
         </div>
         `;
