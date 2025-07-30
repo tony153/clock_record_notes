@@ -55,7 +55,7 @@ if (file && file.type.startsWith('image/')) {
     try {
         // 使用壓縮函數將圖片轉換為 Base64 字串
         let base64Data = await compressImageToBase64(file, parseFloat(Image_compression_rate));
-        show_message("" + file.name + " 已壓縮，大小：" + (file.size / 1024).toFixed(2) + " KB");
+        show_message("" + file.name + " 已壓縮，大小：" + ((file.size / 1024)*parseFloat(Image_compression_rate)).toFixed(2) + " KB");
 
         // 將 Base64 字串設置為預覽圖片的 src
         const img = new Image();
