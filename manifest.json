@@ -4,7 +4,7 @@
   "start_url": "./addRecord.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#4f9bc1",
+  "theme_color": "#66bae4",
   "icons": [
     {
       "src": "favicon.png",
