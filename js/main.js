@@ -1,5 +1,7 @@
 var API_URL = ""; // Replace with your API URL
+var Image_compression_rate = 0.8; // Default compression rate
 const STORAGE_KEY = 'user_api_url';
+const STORAGE_KEY_Image_compression_rate = 'image_compression_rate';
 
 // 🚀 啟動時檢查 localStorage
 window.addEventListener('DOMContentLoaded', () => {
@@ -9,6 +11,14 @@ window.addEventListener('DOMContentLoaded', () => {
       API_URL = savedApi; // 更新全域變數 API_URL
     } else {
       console.log('📭 尚未記錄任何 API，請輸入');
+    }
+
+    const savedImage_compression_rate = localStorage.getItem(STORAGE_KEY_Image_compression_rate);
+    if (savedImage_compression_rate) {
+      console.log('✅ 使用者之前記錄的 圖片壓縮率:', savedImage_compression_rate);
+      Image_compression_rate = savedImage_compression_rate; // 更新全域變數 API_URL
+    } else {
+      console.log('📭 尚未記錄任何 圖片壓縮率，請輸入');
     }
   });
 
