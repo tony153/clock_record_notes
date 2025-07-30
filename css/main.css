@@ -183,6 +183,7 @@ body{
     justify-content: space-around;
     background-color: white;
     padding: 2px;
+    padding-bottom: 10px;
 }
 
 .bottom-nav > .page-button{
