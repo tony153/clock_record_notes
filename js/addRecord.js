@@ -1,5 +1,6 @@
 var current_time = ""
 let resizedBlob = null;
+var fileData = null;
 function updateTime() {
     const now = new Date();
     const date = now.toLocaleDateString();      // 格式如 2025/7/24
@@ -15,45 +16,69 @@ var setInterval_timecounter=setInterval(updateTime, 1000); // 每 1 秒執行一
 updateTime(); // 初始立即執行一次
 
 
-document.getElementById('fileInput').addEventListener('change', function (event) {
-const file = event.target.files[0];
-if (file && file.type.startsWith('image/')) {
-
-    const img = new Image();
+function compressImageToBase64(file, quality = 0.8) {
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = function (e) {
-        document.querySelector('.attachment .preview').src = e.target.result;
-
-        img.src = e.target.result;
-
-
-        const base64Data = reader.result.split(',')[1]; // 去掉前綴
-        fileData = {
-            name: file.name,
-            type: file.type,
-            contents: base64Data
-        };
-    };
-
-    img.onload = () => {
+      const img = new Image();
+      img.onload = function () {
         const MAX_WIDTH = 800;
-        const scale = MAX_WIDTH / img.width;
-        const width = MAX_WIDTH;
-        const height = img.height * scale;
+        const scale = Math.min(1, MAX_WIDTH / img.width);
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
 
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = width;
-        canvas.height = height;
-        ctx.drawImage(img, 0, 0, width, height);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        canvas.toBlob((blob) => {
-          resizedBlob = blob;
-          alert("圖片已成功縮小，可以上傳！");
-        }, "image/jpeg", 0.8); // 壓縮品質 0.8
+        try {
+          const dataUrl = canvas.toDataURL('image/jpeg', quality);
+          resolve(dataUrl);
+        } catch (err) {
+          reject(err);
+        }
       };
 
+      img.onerror = () => reject(new Error("圖片載入失敗"));
+      img.src = e.target.result;
+    };
+
+    reader.onerror = () => reject(new Error("圖片讀取失敗"));
     reader.readAsDataURL(file);
+  });
+}
+
+
+document.getElementById('fileInput').addEventListener('change',async function (event) {
+const file = event.target.files[0];
+if (file && file.type.startsWith('image/')) {
+    try {
+        // 使用壓縮函數將圖片轉換為 Base64 字串
+        let base64Data = await compressImageToBase64(file, 0.8);
+        show_message("" + file.name + " 已壓縮，大小：" + (file.size / 1024).toFixed(2) + " KB");
+
+        // 將 Base64 字串設置為預覽圖片的 src
+        const img = new Image();
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            document.querySelector('.attachment .preview').src = e.target.result;
+
+            img.src = e.target.result;
+
+
+            base64Data = base64Data.split(',')[1]; // 去掉前綴
+            // 將 Base64 字串和檔案資訊存儲到 fileData 物件中
+            fileData = {
+                name: file.name,
+                type: file.type,
+                contents: base64Data
+            };
+        };
+
+        reader.readAsDataURL(file);
+    } catch (err) {
+        console.error("壓縮失敗：", err);
+    }
     
 } else {
     document.querySelector('.attachment .preview').src = '';
