@@ -109,6 +109,7 @@ body{
     background-color:white;
     border-radius: 15px;
     min-height: 50px;
+    overflow-x: auto;
 }
 
 .shostcut{
